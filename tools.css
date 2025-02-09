@@ -1,70 +1,75 @@
 /* Global Styles */
-body {
+html, body {
+    margin: 0;
+    padding: 0;
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(to right, #000000, #1e3c72);
     color: white;
-    text-align: center;
-    margin: 0;
-    height: 100vh;
+    overflow-x: hidden;
+}
+
+body {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
     background: linear-gradient(to left, #050505, #00f2fe);
     padding: 20px;
     text-align: center;
-    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 header h1 {
     margin: 0;
     font-size: 28px;
 }
-
-header p {
-    margin: 5px;
-    font-size: 16px;
-}
+ header h2 {
+ }
 
 .tool-section {
+    padding: 20px;
+    flex: 1;
+    margin-top: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 1;
-    padding: 20px;
+    background-color: white;
 }
 
 .tool-container {
     color: black;
-    padding: 30px;
+    padding: 20px; /* Reduced padding */
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    max-width: 1200px;
+    max-width: 700px; /* Smaller max-width */
+    width: 90%;
+    background: transparent;
 }
 
 .tool-container h2 {
     font-size: 24px;
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Reduced margin */
     color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    text-align: center;
 }
 
-/* Tools Layout */
 .tools {
-    display: grid;  /* Use grid for a responsive layout */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Auto-fill columns */
-    gap: 20px;  /* Space between the tools */
-    max-width: 1200px; /* Ensure container width */
-    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Smaller minmax */
+    gap: 15px; /* Reduced gap */
+    justify-content: center;
 }
 
-/* Tool Design */
 .tool {
-    background: transparent; 
-    padding: 20px;
-    border-radius: 10px;
+    background: #333333;
+    padding: 15px; /* Reduced padding */
+    border-radius: 50%;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
     transition: all 0.3s ease;
@@ -72,46 +77,24 @@ header p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 120px; /* Smaller width */
+    height: 120px; /* Smaller height */
+    overflow: hidden;
 }
 
-/* Tool Images */
 .tool img {
     object-fit: contain;
-    margin-bottom: 10px;
+    width: 60px; /* Smaller image */
+    height: 60px; /* Smaller image */
+    margin-bottom: 8px; /* Reduced margin */
 }
 
-.tool:nth-child(1) img { 
-    width: 120px;
-    height: 80px;
-}
-
-.tool:nth-child(2) img { 
-    width: 200px;
-    height: 200px;
-}
-
-.tool:nth-child(3) img { 
-    width: 110px;
-    height: 90px;
-}
-
-.tool:nth-child(4) img { 
-    width: 90px;
-    height: 90px;
-}
-
-.tool:nth-child(5) img { 
-    width: 200px;
-    height: 200px;
-}
-/* Tool Text */
 .tool p {
-    font-size: 16px;
+    font-size: 14px; /* Smaller font size */
     font-weight: bold;
     color: white;
 }
 
-/* Hover Effect */
 .tool:hover {
     background: #1BB52F;
     transform: translateY(-5px);
@@ -120,58 +103,20 @@ header p {
 
 /* Footer */
 footer {
-    background-color: #050505;
-    padding: 10px;
-    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 4px;
     text-align: center;
+    backdrop-filter: blur(8px); /* Glass effect */
+    border-top: 2px solid rgba(255, 255, 255, 0.2); /* Subtle separator */
+    background: rgba(0, 0, 0, 0.5); /* Slight transparency */
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.5); /* Soft shadow */
+    z-index: 998; /* Keeps footer below navbar */
 }
 
-/* Media Query for Mobile Devices */
-@media (max-width: 768px) {
-    /* Adjust the grid layout for mobile devices (2 tools per row) */
-    .tools {
-        grid-template-columns: repeat(2, 1fr); /* Two tools per row */
-    }
-
-    /* Make the header text smaller on mobile */
-    header h1 {
-        font-size: 22px;
-    }
-
-    /* Adjust the size of the tools to fit mobile better */
-    .tool {
-        padding: 15px;
-    }
-
-    .tool img {
-        width: 80px;
-        height: 60px;
-    }
-
-    /* Adjust the font size of the tool text */
-    .tool p {
-        font-size: 14px;
-    }
-}
-
-/* Media Query for Very Small Devices (extra small screens) */
-@media (max-width: 480px) {
-    /* Make the grid two columns on smaller screens */
-    .tools {
-        grid-template-columns: repeat(2, 1fr); /* Two tools per row */
-    }
-
-    /* Adjust the tool image size and text */
-    .tool img {
-        width: 70px;
-        height: 50px;
-    }
-
-    .tool p {
-        font-size: 12px;
-    }
-
-    header h1 {
-        font-size: 20px;
-    }
+footer p {
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
 }
