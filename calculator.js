@@ -27,44 +27,67 @@ function deleteLastCharacter() {
     display.value = display.value.slice(0, -1);
 }
 
-// Speak the result
+// Speak the result in Indian number format
 function speakResult(result) {
-    let speech = new SpeechSynthesisUtterance(result);
-    speech.lang = 'en-US';
+    let formattedResult = formatIndianNumber(result);
+    let speech = new SpeechSynthesisUtterance(formattedResult);
+    speech.lang = 'en-IN';  // Indian English accent
     window.speechSynthesis.speak(speech);
 }
 
-// Start Voice Recognition (for voice control)
-function startVoiceRecognition() {
-    let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = 'en-US';
-    recognition.start();
+// Format number in Indian numbering system (e.g., 2,34,878 for 2 lakh 34 thousand)
+function formatIndianNumber(num) {
+    num = parseInt(num);
+    if (isNaN(num)) return "Error";
 
-    recognition.onresult = function(event) {
-        let command = event.results[0][0].transcript.toLowerCase();
-        handleVoiceCommand(command);
-    };
+    let numStr = num.toString();
+    let lastThree = numStr.slice(-3);
+    let otherNumbers = numStr.slice(0, -3);
+
+    if (otherNumbers !== '') {
+        otherNumbers = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',');
+    }
+
+    return otherNumbers !== '' ? otherNumbers + ',' + lastThree : lastThree;
 }
 
-// Handle voice command and append it to display
-function handleVoiceCommand(command) {
-    // Add common mathematical terms to voice command
-    if (command.includes('plus')) {
-        appendToDisplay('+');
-    } else if (command.includes('minus')) {
-        appendToDisplay('-');
-    } else if (command.includes('times') || command.includes('multiply')) {
-        appendToDisplay('*');
-    } else if (command.includes('divide')) {
-        appendToDisplay('/');
-    } else if (command.includes('clear')) {
-        clearDisplay();
-    } else if (command.includes('equals') || command.includes('calculate')) {
+// Start Voice Recognition (continuous mode)
+let recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+recognition.lang = 'en-IN'; // Indian English
+recognition.continuous = true; // Keep it running
+recognition.interimResults = false;
+
+recognition.onresult = function(event) {
+    let command = event.results[event.results.length - 1][0].transcript.toLowerCase();
+    processVoiceCommand(command);
+};
+
+function startVoiceRecognition() {
+    recognition.start();
+}
+
+// Stop Voice Recognition
+function stopVoiceRecognition() {
+    recognition.stop();
+}
+
+// Process voice command with full sentence parsing
+function processVoiceCommand(command) {
+    let convertedCommand = command
+        .replace(/plus/g, '+')
+        .replace(/minus/g, '-')
+        .replace(/into|multiply/g, '*')
+        .replace(/divide/g, '/')
+        .replace(/equals|calculate/g, '=');
+
+    if (convertedCommand.includes('=')) {
+        display.value = convertedCommand.replace('=', '');
         calculateResult();
-    } else if (command.includes('backspace')) {
+    } else if (convertedCommand.includes('clear')) {
+        clearDisplay();
+    } else if (convertedCommand.includes('backspace')) {
         deleteLastCharacter();
     } else {
-        // If the command doesn't match any, just append it to the display
-        appendToDisplay(command);
+        appendToDisplay(convertedCommand);
     }
 }
