@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Compressor</title>
+        <link rel="stylesheet" href=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js">
+    </script>
+    <script src=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+    </script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href=
+"https://fonts.googleapis.com/css2?family=Amiri&family=Lobster&family=Pacifico&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="image_compressor.css">
+</head>
+<body>
+
+    <section id="image_compressor">
+        <h2>Image Compressor</h2>
+        <input type="file" id="imageInput" accept="image/*" />
+        <br/>
+        <label for="compressionRange">Compression Quality: <span id="compressionValue">70%</span></label>
+        <input type="range" id="compressionRange" min="1" max="100" value="70" />
+        <br/>
+        <button onclick="compressImage()">Compress Image</button>
+        <br/>
+        <canvas id="canvas" style="display: none;"></canvas>
+        <a id="downloadLink" href="#" style="display:none;">Download Compressed Image</a>
+    </section>
+
+    <script src="image_compressor.js"></script>
+</body>
+</html>

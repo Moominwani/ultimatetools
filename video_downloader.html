@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Video Downloader</title>
+    
+    <link rel="stylesheet" href="video_downloader.css">
+</head>
+<body>
+
+    <section id="video_downloader">
+        <div class="video-downloader-container">
+            <h2>Online Video Downloader</h2>
+            <input type="text" id="videoUrl" placeholder="Enter video URL here" />
+            <button onclick="downloadVideo()">Download Video</button>
+            <br/>
+            <a id="downloadLink" href="#" target="_blank" style="display:none;">Download Video</a>
+            <p id="instructionText" style="display:none;">Click above download button</p>
+        </div>
+    </section>
+
+    <script src="video_downloader.js"></script>
+</body>
+</html>

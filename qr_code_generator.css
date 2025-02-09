@@ -1,0 +1,137 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #000000, #1e3c72);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Prevents unnecessary scrolling */
+}
+
+header {
+    background: linear-gradient(to left, #050505, #00f2fe);
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    padding: 12px 18px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: black;
+}
+
+.container {
+    background: white;
+    color: black;
+    padding: 20px;
+    margin: auto;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background: linear-gradient(to right, #C46A24, #6E44D1);
+    padding: 10px 20px;
+    font-size: 1.1em;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: linear-gradient(to right, #1BB52F, #D515B1);
+}
+
+#qrContainer {
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#qrCanvas {
+    background: white;
+}
+
+#downloadBtn {
+    display: none;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background-color: #3498db;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid #2980b9;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    width: auto; /* Make the width auto to avoid overflow */
+    margin-left: auto; /* Center the button */
+    margin-right: auto; /* Center the button */
+}
+
+#downloadBtn:hover {
+    background-color: #2980b9;
+    border-color: #1c5d8d;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Ensure that everything stays within bounds */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

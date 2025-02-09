@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+        <link rel="stylesheet" href=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js">
+    </script>
+    <script src=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+    </script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href=
+"https://fonts.googleapis.com/css2?family=Amiri&family=Lobster&family=Pacifico&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="qr_code_generator.css">
+</head>
+<body>
+
+    <!-- QR Code Generator Section -->
+    <section id="qr-code-generator">
+        <h2>QR Code Generator</h2>
+        <div class="converter-box">
+            <label for="qrType">Select QR Type:</label>
+            <select id="qrType" onchange="updateFields()">
+                <option value="text">Text</option>
+                <option value="url">Website URL</option>
+                <option value="phone">Phone Number</option>
+                <option value="email">Email</option>
+                <option value="vcard">VCard (Contact)</option>
+            </select>
+
+            <div id="inputFields">
+                <input type="text" id="qrText" placeholder="Enter text or URL">
+            </div>
+
+            <button onclick="generateQRCode()">Generate QR Code</button>
+
+            <div id="qrContainer">
+                <canvas id="qrCanvas"></canvas>
+            </div>
+
+            <button id="downloadBtn" onclick="downloadQRCode()" style="display: none;">Download QR Code</button>
+        </div>
+    </section>
+
+    <script src="qr_code_generator.js"></script>
+</body>
+</html>

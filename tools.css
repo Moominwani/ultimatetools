@@ -1,0 +1,177 @@
+/* Global Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #000000, #1e3c72);
+    color: white;
+    text-align: center;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background: linear-gradient(to left, #050505, #00f2fe);
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+header p {
+    margin: 5px;
+    font-size: 16px;
+}
+
+.tool-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 20px;
+}
+
+.tool-container {
+    color: black;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 1200px;
+}
+
+.tool-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Tools Layout */
+.tools {
+    display: grid;  /* Use grid for a responsive layout */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Auto-fill columns */
+    gap: 20px;  /* Space between the tools */
+    max-width: 1200px; /* Ensure container width */
+    margin: 0 auto;
+}
+
+/* Tool Design */
+.tool {
+    background: transparent; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Tool Images */
+.tool img {
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.tool:nth-child(1) img { 
+    width: 120px;
+    height: 80px;
+}
+
+.tool:nth-child(2) img { 
+    width: 200px;
+    height: 200px;
+}
+
+.tool:nth-child(3) img { 
+    width: 110px;
+    height: 90px;
+}
+
+.tool:nth-child(4) img { 
+    width: 90px;
+    height: 90px;
+}
+
+.tool:nth-child(5) img { 
+    width: 200px;
+    height: 200px;
+}
+/* Tool Text */
+.tool p {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Hover Effect */
+.tool:hover {
+    background: #1BB52F;
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer */
+footer {
+    background-color: #050505;
+    padding: 10px;
+    color: white;
+    text-align: center;
+}
+
+/* Media Query for Mobile Devices */
+@media (max-width: 768px) {
+    /* Adjust the grid layout for mobile devices (2 tools per row) */
+    .tools {
+        grid-template-columns: repeat(2, 1fr); /* Two tools per row */
+    }
+
+    /* Make the header text smaller on mobile */
+    header h1 {
+        font-size: 22px;
+    }
+
+    /* Adjust the size of the tools to fit mobile better */
+    .tool {
+        padding: 15px;
+    }
+
+    .tool img {
+        width: 80px;
+        height: 60px;
+    }
+
+    /* Adjust the font size of the tool text */
+    .tool p {
+        font-size: 14px;
+    }
+}
+
+/* Media Query for Very Small Devices (extra small screens) */
+@media (max-width: 480px) {
+    /* Make the grid two columns on smaller screens */
+    .tools {
+        grid-template-columns: repeat(2, 1fr); /* Two tools per row */
+    }
+
+    /* Adjust the tool image size and text */
+    .tool img {
+        width: 70px;
+        height: 50px;
+    }
+
+    .tool p {
+        font-size: 12px;
+    }
+
+    header h1 {
+        font-size: 20px;
+    }
+}
