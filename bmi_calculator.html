@@ -1,0 +1,263 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Inverted BMI Calculator with Meter</title>  
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            margin: 0;  
+            padding: 20px;  
+            background: linear-gradient(to right, #000000, #1e3c72);
+        .container {  
+            max-width: 500px;  
+            margin: 0 auto;  
+            padding: 30px;  
+            background-color: #ffffff;  /* White background */
+            border-radius: 15px;  
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);  
+            border: 2px solid #4CAF50;  /* Green border around the box */
+        }  
+        input, select {  
+            width: 100%;  
+            padding: 12px;  
+            margin: 12px 0;  
+            border: 1px solid #4CAF50;  /* Green border for input fields */
+            border-radius: 8px;  
+            background-color: #f1f1f1;  /* Light grey background for inputs */
+        }  
+        button {  
+            width: 100%;  
+            padding: 12px;  
+            background-color: #4CAF50;  
+            color: white;  
+            border: none;  
+            border-radius: 8px;  
+            cursor: pointer;  
+        }  
+        button:hover {  
+            background-color: #45a049;  
+        }  
+        .result {  
+            margin-top: 20px;  
+            text-align: center;  
+        }  
+        .height-status {  
+            margin-top: 10px;  
+            font-weight: bold;  
+        }  
+        .meter-container {  
+            width: 100%;  
+            height: 180px;  
+            position: relative;  
+            margin-top: 20px;  
+        }  
+        .half-circle {  
+            width: 100%;  
+            height: 100%;  
+            border-radius: 100% 100% 0 0;  
+            background: linear-gradient(90deg, #ff0000, #f7a800, #4caf50);  
+            position: absolute;  
+            bottom: 0;  
+            transform: rotate(0deg);  
+        }  
+        .arrow {  
+            position: absolute;  
+            bottom: 15px;  
+            left: 50%;  
+            transform-origin: bottom;  
+            width: 5px;  
+            height: 40px;  
+            background-color: black;  
+            transform: rotate(0deg);  
+            transition: transform 0.5s ease-in-out;  
+        }  
+        .numbering {  
+            position: absolute;  
+            top: 0;  
+            width: 100%;  
+            display: flex;  
+            justify-content: space-between;  
+            padding: 0 10px;  
+        }  
+        .numbering div {  
+            font-size: 12px;  
+            font-weight: bold;  
+        }  
+        .bmi-categories {  
+            position: absolute;  
+            bottom: 0px;  
+            width: 100%;  
+            display: flex;  
+            justify-content: space-between;  
+            padding: 0 10px;  
+            font-size: 12px;  
+            font-weight: bold;  
+        }  
+        .bmi-categories div {  
+            width: calc(100%/4);  
+            text-align: center;  
+        }  
+        .bmi-categories hr {  
+            height: 5px;  
+            background-color: black;  
+            border: none;  
+            margin: 0;  
+            position: absolute;  
+            bottom: 0;  
+        }  
+        .message {  
+            margin-top: 10px;  
+            text-align: center;  
+            font-style: italic;  
+            color: #777;  
+        }  
+        .healthy-range {  
+            margin-top: 10px;  
+            text-align: center;  
+            font-size: 14px;  
+            color: #555;  
+        }  
+    </style>  
+</head>  
+<body>  
+  
+    <div class="container">  
+        <h2>Inverted BMI Calculator with Meter</h2>  
+          
+        <label for="weight">Weight:</label>  
+        <input type="number" id="weight" placeholder="Enter your weight">  
+        <select id="weight-unit">  
+            <option value="kg">kg</option>  
+            <option value="lb">lb</option>  
+        </select>  
+  
+        <label for="height">Height:</label>  
+        <div id="height-inputs">  
+            <input type="number" id="height-cm" placeholder="Enter height in cm" style="display:none;">  
+            <input type="number" id="height-m" placeholder="Enter height in meters" style="display:none;">  
+            <input type="number" id="height-ft" placeholder="Feet" style="display:none;">  
+            <input type="number" id="height-in" placeholder="Inches" style="display:none;">  
+        </div>  
+        <select id="height-unit">  
+            <option value="cm">cm</option>  
+            <option value="m">m</option>  
+            <option value="ft-in">Feet and Inches</option>  
+        </select>  
+  
+        <label for="age">Age:</label>  
+        <input type="number" id="age" placeholder="Enter your age">  
+          
+        <button onclick="calculateBMI()">Calculate BMI</button>  
+  
+        <div class="result" id="result"></div>  
+        <div class="height-status" id="height-status"></div>  
+  
+        <div class="meter-container">  
+            <div class="half-circle" id="half-circle"></div>  
+            <div class="arrow" id="arrow"></div>  
+            <div class="numbering">  
+                <div>0</div>  
+                <div>18.5</div>  
+                <div>24.9</div>  
+                <div>30</div>  
+            </div>  
+            <div class="bmi-categories">  
+                <div>Underweight</div>  
+                <div>Normal</div>  
+                <div>Overweight</div>  
+                <div>Obese</div>  
+            </div>  
+        </div>  
+        <div class="healthy-range">Healthy BMI range: 18.5 kg/m² - 24.9 kg/m²</div>  
+    </div>  
+  
+    <script>  
+        // Function to display correct height inputs based on selected unit  
+        document.getElementById('height-unit').addEventListener('change', function() {  
+            var unit = this.value;  
+            // Hide all height input fields  
+            document.getElementById('height-cm').style.display = 'none';  
+            document.getElementById('height-m').style.display = 'none';  
+            document.getElementById('height-ft').style.display = 'none';  
+            document.getElementById('height-in').style.display = 'none';  
+              
+            // Show correct input fields based on selected unit  
+            if (unit === 'cm') {  
+                document.getElementById('height-cm').style.display = 'block';  
+            } else if (unit === 'm') {  
+                document.getElementById('height-m').style.display = 'block';  
+            } else if (unit === 'ft-in') {  
+                document.getElementById('height-ft').style.display = 'block';  
+                document.getElementById('height-in').style.display = 'block';  
+            }  
+        });  
+  
+        function calculateBMI() {  
+            var weight = parseFloat(document.getElementById('weight').value);  
+            var weightUnit = document.getElementById('weight-unit').value;  
+            var heightUnit = document.getElementById('height-unit').value;  
+            var age = parseFloat(document.getElementById('age').value);  
+            var height = 0;  
+  
+            // Convert weight to kg if it is in lb  
+            if (weightUnit === 'lb') {  
+                weight = weight * 0.453592;  
+            }  
+  
+            // Convert height to meters based on the selected unit  
+            if (heightUnit === 'cm') {  
+                height = parseFloat(document.getElementById('height-cm').value) / 100;  
+            } else if (heightUnit === 'm') {  
+                height = parseFloat(document.getElementById('height-m').value);  
+            } else if (heightUnit === 'ft-in') {  
+                var feet = parseFloat(document.getElementById('height-ft').value);  
+                var inches = parseFloat(document.getElementById('height-in').value);  
+                height = (feet * 0.3048) + (inches * 0.0254);  
+            }  
+  
+            // Validate input  
+            if (isNaN(weight) || isNaN(height) || isNaN(age) || weight <= 0 || height <= 0 || age <= 0) {  
+                alert("Please enter valid values for weight, height, and age.");  
+                return;  
+            }  
+  
+            // Calculate BMI  
+            var bmi = weight / (height * height);  
+  
+            // Display the result  
+            var result = "Your BMI: " + bmi.toFixed(2);  
+  
+            // Update the meter and display BMI category  
+            var category = '';  
+            var arrowColor = '';  
+            var arrowPosition = 0;  
+            if (bmi < 18.5) {  
+                category = 'Underweight';  
+                arrowColor = 'red';  
+                arrowPosition = 0;  // Underweight range  
+            } else if (bmi >= 18.5 && bmi <= 24.9) {  
+                category = 'Normal';  
+                arrowColor = 'green';  
+                arrowPosition = 0.5; // Normal range  
+            } else if (bmi >= 25 && bmi <= 29.9) {  
+                category = 'Overweight';  
+                arrowColor = 'yellow';  
+                arrowPosition = 0.75;  // Overweight range  
+            } else {  
+                category = 'Obese';  
+                arrowColor = 'red';  
+                arrowPosition = 1;  // Obese range  
+            }  
+  
+            // Apply styles to arrow  
+            document.getElementById('arrow').style.backgroundColor = arrowColor;  
+            document.getElementById('arrow').style.transform = 'translateX(' + (arrowPosition * 100) + '%)';  
+            document.getElementById('result').innerHTML = result;  
+            document.getElementById('height-status').innerHTML = "Category: " + category;  
+        }  
+    </script>  
+  
+</body>  
+  </html>
