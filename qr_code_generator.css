@@ -132,12 +132,24 @@ button:hover {
     transform: translateY(-2px);
 }
 
-/* Ensure everything adjusts on smaller screens */
+/* Two-column layout for vCard */
+#inputFields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+#inputFields input {
+    width: 100%;
+}
+
 @media (max-width: 480px) {
-    .container {
-        width: 90%;
-        max-height: unset; /* Allow container to adjust in height */
-        overflow: visible; /* Prevent content from being hidden */
+    /* For mobile devices, make the form stack */
+    #inputFields {
+        display: block;
     }
 
     input, select, button {
@@ -150,10 +162,9 @@ button:hover {
         width: 80%;
     }
 
-    /* Ensure qrContainer has correct styling */
     #qrContainer {
         max-height: none;
         height: auto;
         overflow: visible;
     }
-}
+    }
