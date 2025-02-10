@@ -9,6 +9,7 @@ html, body {
     text-align: center;
 }
 
+/* Header with Toggle Button (Navbar from Home Page) */
 header {
     background: #00bcd4;
     padding: 15px;
@@ -18,12 +19,21 @@ header {
     left: 0;
     width: 100%;
     z-index: 1000;
+    transition: background-color 0.3s; /* Smooth transition for background */
 }
 
 header h1 {
     margin: 0;
     font-size: 24px;
-    color: white;
+    color: white; /* White text for light mode (to be changed in dark mode) */
+    display: inline-block;
+    margin-right: 15px; /* Space for the toggle */
+    transition: color 0.3s; /* Smooth transition for text color */
+}
+
+/* Header styles for Dark Mode */
+body.dark-mode header h1 {
+    color: #121212; /* Dark text for header in dark mode */
 }
 
 /* Tool Section */
@@ -97,4 +107,20 @@ footer p {
     color: white;
     font-size: 17px;
     font-weight: bold;
+}
+
+/* Media Queries for Responsiveness */
+
+/* For screens larger than 768px (tablet and desktop) */
+@media (min-width: 768px) {
+    header h1 {
+        font-size: 28px; /* Adjust header size */
+    }
+}
+
+/* For very large screens (e.g., desktops, large laptops) */
+@media (min-width: 1200px) {
+    header {
+        padding: 20px; /* Add more space in the header */
+    }
 }
