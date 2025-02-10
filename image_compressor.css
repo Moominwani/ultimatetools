@@ -1,7 +1,7 @@
 /* General Styles */
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to right, #000000, #1e3c72);
+    background: white;
     color: white;
     text-align: center;
     padding: 0;
@@ -22,7 +22,7 @@ body {
     width: 90%;
     height: 90vh;
     text-align: center;
-    border: 5px solid rgba(255, 255, 255, 0.4); /* Visible border */
+    border: 5px solid rgba(26, 25, 25, 1); /* Visible border */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,7 +31,7 @@ body {
 
 /* Heading */
 #image_compressor h2 {
-    color: #E4ECE9;
+    color: #171414;
     font-size: 2.5rem;
     margin-bottom: 20px;
 }
@@ -41,7 +41,7 @@ label {
     display: block;
     margin: 15px 0;
     font-size: 1.2rem;
-    color: #E4ECE9;
+    color: #040404;
 }
 
 /* Input Fields */
