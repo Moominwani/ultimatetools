@@ -49,32 +49,34 @@ body.dark-mode header h1 {
     color: #121212; /* Dark text for header in dark mode */
 }
 
-/* Main Section */
-main {
-    padding-top: 80px; /* To avoid content being hidden behind the fixed header */
-    padding-bottom: 50px; /* To avoid content being hidden behind the fixed footer */
-    max-width: 100%; /* Ensure it doesn't overflow */
+/* Theme Toggle Button */
+.toggle-switch {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
 }
 
-/* Home Section */
-#home {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-    color: inherit; /* Ensure it inherits color from body */
-    width: 100%;
+.toggle-switch input {
+    display: none; /* Hide the checkbox */
 }
 
-#home h1 {
-    font-size: 32px;
-    color: inherit; /* Inherit color from body */
-    margin-bottom: 20px;
+.icon {
+    font-size: 24px;
+    display: none;
 }
 
-#home p {
-    font-size: 18px;
-    color: inherit; /* Inherit color from body */
-    line-height: 1.6;
+/* Show Sun Icon for Light Mode */
+body.light-mode #sun-icon {
+    display: inline-block;
+}
+
+/* Show Moon Icon for Dark Mode */
+body.dark-mode #moon-icon {
+    display: inline-block;
 }
 
 /* Footer Section */
@@ -95,44 +97,4 @@ footer p {
     color: white;
     font-size: 17px;
     font-weight: bold;
-}
-
-/* Media Queries for Responsiveness */
-
-/* For screens larger than 768px (tablet and desktop) */
-@media (min-width: 768px) {
-    #home h1 {
-        font-size: 40px; /* Increase font size on larger screens */
-    }
-
-    #home p {
-        font-size: 20px; /* Adjust paragraph font size for better readability */
-    }
-
-    footer p {
-        font-size: 18px; /* Increase footer text size */
-    }
-
-    header h1 {
-        font-size: 28px; /* Adjust header size */
-    }
-}
-
-/* For very large screens (e.g., desktops, large laptops) */
-@media (min-width: 1200px) {
-    #home {
-        max-width: 1200px; /* Prevent content from becoming too wide */
-    }
-
-    header {
-        padding: 20px; /* Add more space in the header */
-    }
-}
-/* Navbar */
-nav {
-    z-index: 999; /* Make sure it's above other content */
-    margin-top: 1px; /* Adjust to make sure it's not hidden behind the header */
-}
-#home {
-    padding-top: 120px; /* Ensures content is below navbar */
 }

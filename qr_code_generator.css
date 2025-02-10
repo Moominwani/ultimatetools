@@ -132,10 +132,11 @@ button:hover {
     transform: translateY(-2px);
 }
 
-/* Two-column layout for vCard */
+/* Flexbox layout for vCard form */
 #inputFields {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     gap: 15px;
     width: 100%;
     max-width: 400px;
@@ -143,13 +144,27 @@ button:hover {
 }
 
 #inputFields input {
-    width: 100%;
+    width: 48%;  /* Adjusted for two columns */
+    box-sizing: border-box;
 }
 
+#downloadBtn {
+    display: block;
+    width: 80%; /* Ensure the button doesn't overflow */
+    max-width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Adjust layout for smaller screens */
 @media (max-width: 480px) {
-    /* For mobile devices, make the form stack */
+    /* For small screens, make the form fields stack vertically */
     #inputFields {
-        display: block;
+        flex-direction: column;
+    }
+
+    #inputFields input {
+        width: 100%; /* Make inputs take up the full width */
     }
 
     input, select, button {
@@ -167,4 +182,4 @@ button:hover {
         height: auto;
         overflow: visible;
     }
-    }
+}

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Speech with Download</title>
+        <link rel="stylesheet" href=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js">
+    </script>
+    <script src=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+    </script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href=
+"https://fonts.googleapis.com/css2?family=Amiri&family=Lobster&family=Pacifico&display=swap"
+        rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #000000, #1e3c72);
+            color: white;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Full Page Box */
+        #container {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(15px);
+            width: 90%;
+            height: 90vh;
+            text-align: center;
+            border: 5px solid rgba(255, 255, 255, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Heading */
+        #container h2 {
+            color: #E4ECE9;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* Input Fields */
+        textarea {
+            width: 80%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        /* Select and Input Fields */
+        select, input[type="range"] {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        /* Button */
+        button {
+            background: linear-gradient(to right, #C46A24, #6E44D1);
+            padding: 15px 30px;
+            font-size: 1.3rem;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #1BB52F, #D515B1);
+        }
+
+        /* Download Button */
+        #downloadLink {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #3498db;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-decoration: none;
+            border: 3px solid #2980b9;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            display: none;
+        }
+
+        #downloadLink:hover {
+            background-color: #2980b9;
+            border-color: #1c5d8d;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #container {
+                width: 95%;
+                height: 95vh;
+                padding: 30px;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            button, #downloadLink {
+                font-size: 1.2rem;
+                padding: 12px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <h2>Text to Speech Converter</h2>
+        <textarea id="text" placeholder="Type something..."></textarea><br>
+        
+        <label>Voice:</label>
+        <select id="voices"></select><br>
+
+        <label>Speed:</label>
+        <input type="range" id="rate" min="0.5" max="2" value="1" step="0.1"> <span id="rateValue">1</span><br>
+
+        <label>Pitch:</label>
+        <input type="range" id="pitch" min="0.5" max="2" value="1" step="0.1"> <span id="pitchValue">1</span><br>
+
+        <div class="btn-container">
+            <button onclick="speak()">🔊 Speak</button>
+            <button onclick="stopSpeaking()">🛑 Stop</button>
+        </div>
+
+        <a id="downloadLink" download="speech.wav">⬇️ Download  </a>
+    </div>
+
+    <script>
+        let synth = window.speechSynthesis;
+        let voiceSelect = document.getElementById("voices");
+        let rate = document.getElementById("rate");
+        let pitch = document.getElementById("pitch");
+        let downloadBtn = document.getElementById("downloadLink");
+        let mediaRecorder;
+        let audioChunks = [];
+
+        function loadVoices() {
+            let voices = synth.getVoices();
+            voiceSelect.innerHTML = "";
+            voices.forEach(voice => {
+                let option = document.createElement("option");
+                option.value = voice.name;
+                option.textContent = voice.name + (voice.default ? " (Default)" : "");
+                voiceSelect.appendChild(option);
+            });
+        }
+
+        loadVoices();
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        function speak() {
+            let text = document.getElementById("text").value;
+            if (text === "") return;
+            let utterance = new SpeechSynthesisUtterance(text);
+            utterance.voice = synth.getVoices().find(voice => voice.name === voiceSelect.value);
+            utterance.rate = rate.value;
+            utterance.pitch = pitch.value;
+
+            // Start recording audio
+            startRecording();
+
+            utterance.onend = function() {
+                // Stop recording after speech ends
+                stopRecording();
+            };
+
+            synth.speak(utterance);
+        }
+
+        function stopSpeaking() {
+            synth.cancel();
+            downloadBtn.style.display = "none";  // Hide download button if stopped
+            stopRecording();  // Stop recording
+        }
+
+        function startRecording() {
+            // Start the recording using MediaRecorder
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(function(stream) {
+                    mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.ondataavailable = function(event) {
+                        audioChunks.push(event.data);
+                    };
+                    mediaRecorder.onstop = function() {
+                        let audioBlob = new Blob(audioChunks, { type: "audio/wav" });
+                        let audioUrl = URL.createObjectURL(audioBlob);
+                        downloadBtn.href = audioUrl;
+                        downloadBtn.style.display = "inline";  // Show the download button
+                    };
+                    mediaRecorder.start();
+                })
+                .catch(function(error) {
+                    console.error("Error accessing audio: ", error);
+                });
+        }
+
+        function stopRecording() {
+            if (mediaRecorder && mediaRecorder.state === "recording") {
+                mediaRecorder.stop();
+            }
+        }
+
+        rate.oninput = () => document.getElementById("rateValue").textContent = rate.value;
+        pitch.oninput = () => document.getElementById("pitchValue").textContent = pitch.value;
+    </script>
+
+</body>
+</html>
