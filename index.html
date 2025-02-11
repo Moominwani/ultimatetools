@@ -1,185 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <script>
+<!DOCTYPE html>   
+<html lang="en">    
+<head>    
+<script>
     if (localStorage.getItem("passwordEntered") !== "true") {
         window.location.href = "password.html"; // Redirect if password not entered
     }
 </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Tools</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Lobster&family=Pacifico&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="toggle.css">
-    <style>
-        /* Modal Styling */
-        .modal-content {
-            border-radius: 10px;
-            border: 2px solid #00bcd4;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+    <meta charset="UTF-8">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>Ultimate Tools</title>    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>    
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Lobster&family=Pacifico&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="styles.css">  
+        <link rel="stylesheet" href="toggle.css">  
+</head>    
+<body>    <!-- Header Section (Sticky) -->
 
-        .modal-header {
-            background-color: #00bcd4;
-            color: white;
-            border-bottom: 2px solid #00bcd4;
-            text-align: center;
-        }
+<header>    
+    <div class="header-content">  
+        <h1>Ultimate Tools Website</h1>  
+        <!-- The theme toggle button -->  
+        <label class="toggle-switch">  
+            <input type="checkbox" id="theme-toggle">  
+            <span class="slider"></span>  
+            <span id="sun-icon" class="icon"> 🌞Light </span>  
+            <span id="moon-icon" class="icon">🌜Dark</span>  
+        </label>  
+    </div>  
+</header>  
+ <!-- Navigation Bar -->  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="z-index: 9999; position: fixed; top: 60px; left: 0; width: 100%;">  
+        <a class="navbar-brand" href="#">HOME</a>  
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">  
+            <span class="navbar-toggler-icon"></span>  
+        </button>  
+        <div class="collapse navbar-collapse" id="navbarNav">  
+<ul class="navbar-nav">  
+    <li class="nav-item active">  
+        <a class="nav-link" href="index.html">Home</a>  
+    </li>  
+    <li class="nav-item">  
+        <a class="nav-link" href="tools.html">Tools</a>  
+    </li>  
+    <li class="nav-item">  
+        <a class="nav-link" href="contact.html">Contact</a>  
+    </li>  
+</ul>  
+        </div>  
+    </nav>  
+    <!-- Main Content Wrapper (To Push Footer Down) -->    
+<main>    
+    <section id="home">    
+        <h1>Welcome to Ultimate Tools</h1>    
+        <p>Explore a world of convenience with Ultimate Tools. Whether you're working, studying, or just browsing, our platform is designed to simplify your digital experience.</p>    <h2>Efficiency at Your Fingertips</h2>    
+    <p>We believe in providing fast, reliable, and user-friendly solutions for everyday needs. Our platform ensures smooth performance without unnecessary complexity.</p>    
 
-        .modal-body {
-            text-align: center;
-        }
+    <h2>Designed for Everyone</h2>    
+    <p>Ultimate Tools is built with simplicity in mind, making it accessible to everyone—from professionals to casual users. No installations, no hassle—just pure efficiency.</p>    
 
-        .modal-body input {
-            width: 80%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 2px solid #00bcd4;
-            font-size: 16px;
-        }
+    <h2>Stay Connected</h2>    
+    <p>We continuously improve to meet your needs. Have suggestions? We'd love to hear from you! Visit our <b>    <li class="nav-item">  
+    <a class="nav-link" href="contact.html">Contact page</a>  
+</li></b>  to share your feedback.</p>    
+</section>
 
-        .modal-body button {
-            background-color: #00bcd4;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .modal-body button:hover {
-            background-color: #0097a7;
-        }
-
-        /* Center the modal */
-        .modal-dialog {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-
-        .modal-content {
-            margin: auto;
-        }
-
-        /* Prevent modal close on backdrop click */
-        .modal-backdrop {
-            opacity: 1 !important;
-        }
-
-        .modal {
-            backdrop: static;
-            keyboard: false;
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <div class="header-content">
-            <h1>Ultimate Tools Website</h1>
-            <label class="toggle-switch">
-                <input type="checkbox" id="theme-toggle">
-                <span class="slider"></span>
-                <span id="sun-icon" class="icon"> 🌞Light </span>
-                <span id="moon-icon" class="icon">🌜Dark</span>
-            </label>
-        </div>
-    </header>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="z-index: 9999; position: fixed; top: 60px; left: 0; width: 100%;">
-        <a class="navbar-brand" href="#">HOME</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="tools.html">Tools</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <main>
-        <section id="home">
-            <h1>Welcome to Ultimate Tools</h1>
-            <p>Explore a world of convenience with Ultimate Tools. Whether you're working, studying, or just browsing, our platform is designed to simplify your digital experience.</p>
-
-            <h2>Efficiency at Your Fingertips</h2>
-            <p>We believe in providing fast, reliable, and user-friendly solutions for everyday needs. Our platform ensures smooth performance without unnecessary complexity.</p>
-
-            <h2>Designed for Everyone</h2>
-            <p>Ultimate Tools is built with simplicity in mind, making it accessible to everyone—from professionals to casual users. No installations, no hassle—just pure efficiency.</p>
-
-            <h2>Stay Connected</h2>
-            <p>We continuously improve to meet your needs. Have suggestions? We'd love to hear from you! Visit our <b><li class="nav-item"><a class="nav-link" href="contact.html">Contact page</a></li></b> to share your feedback.</p>
-        </section>
-    </main>
-
-    <footer>
-        <p><u>&copy; Created by Momin Wani</u></p>
-    </footer>
-
-
-    <div class="modal" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="passwordModalLabel">Enter Password</h5>
-                </div>
-                <div class="modal-body">
-                    <input type="password" id="passwordInput" placeholder="Enter your password here" />
-                    <button id="submitPassword">Submit</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="toggle.js"></script>
-
-    <script>
-        const password = "moomin2006"; // Change this to your password
-
-        $(document).ready(function() {
-            if (localStorage.getItem("passwordEntered") !== "true") {
-                $('#passwordModal').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                });
-                $('#passwordModal').modal('show');
-                document.getElementById("home").style.display = "none";
-            } else {
-                document.getElementById("home").style.display = "block";
-            }
-        });
-
-        document.getElementById('submitPassword').addEventListener('click', function() {
-            let userPassword = document.getElementById('passwordInput').value;
-
-            if (userPassword === password) {
-                localStorage.setItem("passwordEntered", "true");
-                $('#passwordModal').modal('hide');
-                document.getElementById("home").style.display = "block";
-            } else {
-                alert("Incorrect password!");
-            }
-        });
-    </script>
-
-</body>
-</html>
+</main>  
+    <!-- Footer Section (Now Fixed at Bottom) -->    
+    <footer>    
+        <p><u>&copy; Created by Momin Wani</u></p>    
+    </footer>    
+     <script src="toggle.js"></script>  </body>  
+</html>  
