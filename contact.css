@@ -1,24 +1,26 @@
-body {
+/* Global Styles */
+html, body {
+    margin: 0;
+    padding: 0;
     font-family: 'Poppins', sans-serif;
     background: white;
-    color: white;
+    color: black;
     text-align: center;
-    padding: 0;
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
+/* Contact Section */
 #contact {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    flex-direction: column;
+    min-height: 100vh; /* Allows content to expand without being cut off */
     width: 100%;
+    padding-top: 60px; /* Pushes content below any fixed header */
+    padding-bottom: 80px; /* Ensures button does not overlap with footer */
 }
 
+/* Contact Form Container */
 .contact-container {
     background: white;
     color: black;
@@ -30,23 +32,26 @@ body {
     text-align: center;
 }
 
+/* Form Heading */
 h2 {
     font-size: 24px;
     margin-bottom: 20px;
 }
 
+/* Labels */
 label {
     font-size: 16px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     display: block;
     text-align: left;
     margin-left: 20px;
 }
 
+/* Input and Textarea */
 input, textarea {
     width: calc(100% - 40px);
     padding: 10px;
-    margin: 10px 20px 20px 20px;
+    margin: 5px 20px 15px 20px;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
@@ -55,6 +60,7 @@ textarea {
     resize: vertical;
 }
 
+/* Send Button */
 button {
     background: linear-gradient(to right, #C46A24, #6E44D1);
     padding: 10px 20px;
@@ -68,108 +74,41 @@ button {
     margin-top: 10px;
 }
 
+/* Button Hover Effect */
 button:hover {
     background: linear-gradient(to right, #1BB52F, #D515B1);
 }
 
-/* Footer Section */
+/* Footer */
 footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    padding: 1px;
+    padding: 8px;
     text-align: center;
-    backdrop-filter: blur(8px); /* Glass effect */
-    border-top: 2px solid rgba(255, 255, 255, 0.2); /* Subtle separator */
-    background: rgba(0, 0, 0, 0.5); /* Slight transparency */
-    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.5); /* Soft shadow */
-    z-index: 998; /* Keeps footer below navbar */
+    backdrop-filter: blur(8px);
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.5);
+    z-index: 998;
 }
 
 footer p {
     color: white;
-    font-size: 17px;
-    font-weight: bold;
-}
-
-
-/* Full page layout */
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: white;
-    color: white;
-    padding: 0;
-    margin: 0;
-}
-
-#contact {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.contact-container {
-    background: white;
-    color: black;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    width: 90%;
-    max-width: 600px;
-    text-align: center;
-}
-
-h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-label {
-    font-size: 16px;
-    margin-bottom: 10px;
-    display: block;
-    text-align: left;
-    margin-left: 20px;
-}
-
-input, textarea {
-    width: calc(100% - 40px);
-    padding: 10px;
-    margin: 10px 20px 20px 20px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-textarea {
-    resize: vertical;
-}
-
-button {
-    background: linear-gradient(to right, #C46A24, #6E44D1);
-    padding: 10px 20px;
-    font-size: 1.1em;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: calc(100% - 40px);
-    margin-left: 20px;
-    margin-top: 10px;
-}
-
-button:hover {
-    background: linear-gradient(to right, #1BB52F, #D515B1);
-}
-
-footer {
-    position: fixed;
-    bottom: 10px;
-    width: 100%;
-    text-align: center;
-    color: white;
     font-size: 14px;
+}
+
+/* Responsive Fixes */
+@media (max-width: 768px) {
+    #contact {
+        padding-top: 80px; /* More space for smaller screens */
+        padding-bottom: 100px; /* More space to avoid overlap */
+    }
+}
+
+@media (max-width: 480px) {
+    #contact {
+        padding-top: 100px;
+        padding-bottom: 110px;
+    }
 }

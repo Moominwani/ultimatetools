@@ -5,24 +5,25 @@ html, body {
     font-family: 'Poppins', sans-serif;
     background: white;
     color: black;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
     text-align: center;
-    transition: background 0.3s, color 0.3s; /* Smooth transition for dark mode */
+    transition: background 0.3s, color 0.3s;
+    width: 100%;
 }
 
-/* Dark Mode Styles */
+/* Dark Mode */
 body.dark-mode {
-    background: #121212; /* Dark background */
-    color: white; /* Light text color */
+    background: #121212;
+    color: white;
 }
 
-/* Light Mode Styles */
+/* Light Mode */
 body.light-mode {
-    background: white; /* White background for light mode */
-    color: black; /* Dark text color for light mode */
+    background: white;
+    color: black;
 }
 
-/* Header with Toggle Button */
+/* Header */
 header {
     background: #00bcd4;
     padding: 15px;
@@ -32,63 +33,69 @@ header {
     left: 0;
     width: 100%;
     z-index: 1000;
-    transition: background-color 0.3s; /* Smooth transition for background */
+    transition: background-color 0.3s;
+    overflow: hidden;
 }
 
+/* Header Text */
 header h1 {
     margin: 0;
     font-size: 24px;
-    color: white; /* White text for light mode (to be changed in dark mode) */
+    color: white;
     display: inline-block;
-    margin-right: 15px; /* Space for the toggle */
-    transition: color 0.3s; /* Smooth transition for text color */
+    transition: color 0.3s;
 }
 
-/* Header styles for Dark Mode */
+/* Dark Mode Header */
 body.dark-mode header h1 {
-    color: #121212; /* Dark text for header in dark mode */
+    color: white;
 }
 
-/* Main Section */
-main {
-    padding-top: 80px; /* To avoid content being hidden behind the fixed header */
-    padding-bottom: 50px; /* To avoid content being hidden behind the fixed footer */
-    max-width: 100%; /* Ensure it doesn't overflow */
+/* Navbar */
+nav {
+    width: 100%;
+    background: #00bcd4;
+    overflow: hidden;
+    position: fixed;
+    top: 60px; /* Adjust if needed */
+    left: 0;
+    z-index: 999;
 }
 
-/* Home Section */
+/* Ensure Content is Below Navbar */
 #home {
-    padding: 20px;
-    max-width: 1200px;
+    padding-top: 140px; /* Increased padding to push content below navbar */
+    padding-left: 10px;
+    padding-right: 10px;
     margin: 0 auto;
-    color: inherit; /* Ensure it inherits color from body */
     width: 100%;
 }
 
+/* Home Section */
 #home h1 {
     font-size: 32px;
-    color: inherit; /* Inherit color from body */
+    color: inherit;
     margin-bottom: 20px;
 }
 
 #home p {
     font-size: 18px;
-    color: inherit; /* Inherit color from body */
+    color: inherit;
     line-height: 1.6;
 }
 
-/* Footer Section */
+/* Footer */
 footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    padding: 1px;
+    padding: 8px;
     text-align: center;
-    backdrop-filter: blur(8px); /* Glass effect */
-    border-top: 2px solid rgba(255, 255, 255, 0.2); /* Subtle separator */
-    background: rgba(0, 0, 0, 0.5); /* Slight transparency */
-    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.5); /* Soft shadow */
-    z-index: 998; /* Keeps footer below navbar */
+    backdrop-filter: blur(8px);
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.5);
+    z-index: 998;
 }
 
 footer p {
@@ -97,42 +104,63 @@ footer p {
     font-weight: bold;
 }
 
-/* Media Queries for Responsiveness */
-
-/* For screens larger than 768px (tablet and desktop) */
-@media (min-width: 768px) {
-    #home h1 {
-        font-size: 40px; /* Increase font size on larger screens */
-    }
-
-    #home p {
-        font-size: 20px; /* Adjust paragraph font size for better readability */
-    }
-
-    footer p {
-        font-size: 18px; /* Increase footer text size */
+/* Responsiveness Fixes */
+@media (max-width: 768px) {
+    header {
+        padding: 10px;
     }
 
     header h1 {
-        font-size: 28px; /* Adjust header size */
+        font-size: 20px;
     }
-}
 
-/* For very large screens (e.g., desktops, large laptops) */
-@media (min-width: 1200px) {
+    nav {
+        top: 50px; /* Adjust navbar position for small screens */
+    }
+
     #home {
-        max-width: 1200px; /* Prevent content from becoming too wide */
+        padding-top: 160px; /* Increase space for smaller screens */
     }
 
-    header {
-        padding: 20px; /* Add more space in the header */
+    #home h1 {
+        font-size: 28px;
+    }
+
+    #home p {
+        font-size: 16px;
+    }
+
+    footer p {
+        font-size: 15px;
     }
 }
-/* Navbar */
-nav {
-    z-index: 999; /* Make sure it's above other content */
-    margin-top: 1px; /* Adjust to make sure it's not hidden behind the header */
-}
-#home {
-    padding-top: 120px; /* Ensures content is below navbar */
+
+@media (max-width: 480px) {
+    header {
+        padding: 8px;
+    }
+
+    header h1 {
+        font-size: 18px;
+    }
+
+    nav {
+        top: 48px; /* Adjust navbar position */
+    }
+
+    #home {
+        padding-top: 170px; /* More space for very small screens */
+    }
+
+    #home h1 {
+        font-size: 24px;
+    }
+
+    #home p {
+        font-size: 14px;
+    }
+
+    footer p {
+        font-size: 14px;
+    }
 }
