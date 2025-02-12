@@ -9,7 +9,6 @@ html, body {
     text-align: center;
     transition: background 0.3s, color 0.3s;
     width: 100%;
-    height: 100%; /* Full height to body */
 }
 
 /* Dark Mode */
@@ -27,7 +26,7 @@ body.light-mode {
 /* Header Section */
 header {
     background: #00bcd4;
-    padding: 20px 15px; /* Increase the padding to make more space */
+    padding: 20px 15px; /* Increase padding */
     text-align: center;
     position: fixed;
     top: 0;
@@ -38,33 +37,59 @@ header {
     overflow: hidden;
 }
 
-/* Header Title */
+header .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
 header h1 {
     margin: 0;
-    font-size: 2px; /* Reduced font size for the header title */
+    font-size: 22px;
     color: white;
     display: inline-block;
     transition: color 0.3s;
 }
-/* Dark Mode Toggle Icon */
-#dark-mode-toggle {
-    cursor: pointer;
-    font-size: 26px;
-    color: white;
-    margin-right: 20px;
+
+/* Adjust position of the toggle button for small screens */
+@media (max-width: 768px) {
+    header .header-content {
+        flex-direction: column; /* Stack header content vertically */
+        align-items: flex-start; /* Align items to the left */
+    }
+
+    header h1 {
+        margin-bottom: 10px; /* Add some space between header text and toggle */
+    }
+
+    /* Move the toggle button below the header text on small screens */
+    .toggle-switch {
+        margin-top: 10px;
+    }
 }
 
-/* Home Section */
+/* Navigation Bar */
+nav {
+    width: 100%;
+    background: #00bcd4;
+    overflow: hidden;
+    position: fixed;
+    top: 60px; /* Adjust if needed */
+    left: 0;
+    z-index: 999;
+}
+
+/* Ensure Content is Below Navbar */
 #home {
-    padding-top: 120px; /* Ensure content is below the header */
+    padding-top: 140px; /* Increased padding to push content below navbar */
     padding-left: 10px;
     padding-right: 10px;
     margin: 0 auto;
     width: 100%;
-    box-sizing: border-box; /* Prevents any overflow */
 }
 
-/* Home Section Text */
+/* Home Section */
 #home h1 {
     font-size: 32px;
     color: inherit;
@@ -97,27 +122,32 @@ footer p {
     font-weight: bold;
 }
 
-/* Ensure Body is Full Height */
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Full height of viewport */
-}
-
-/* Responsive Fixes */
+/* Responsiveness Fixes */
 @media (max-width: 768px) {
     header {
-        height: 100px; /* Adjust height for tablets */
+        padding: 10px;
     }
+
+    header h1 {
+        font-size: 20px;
+    }
+
+    nav {
+        top: 50px; /* Adjust navbar position for small screens */
+    }
+
     #home {
-        padding-top: 140px; /* Increase padding for smaller screens */
+        padding-top: 160px; /* Increase space for smaller screens */
     }
+
     #home h1 {
         font-size: 28px;
     }
+
     #home p {
         font-size: 16px;
     }
+
     footer p {
         font-size: 15px;
     }
@@ -125,17 +155,29 @@ body {
 
 @media (max-width: 480px) {
     header {
-        height: 110px; /* Adjust height for mobile screens */
+        padding: 8px;
     }
+
+    header h1 {
+        font-size: 18px;
+    }
+
+    nav {
+        top: 48px; /* Adjust navbar position */
+    }
+
     #home {
-        padding-top: 150px; /* Increase padding for mobile */
+        padding-top: 170px; /* More space for very small screens */
     }
+
     #home h1 {
         font-size: 24px;
     }
+
     #home p {
         font-size: 14px;
     }
+
     footer p {
         font-size: 14px;
     }
