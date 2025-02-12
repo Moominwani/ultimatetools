@@ -3,37 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image to PDF Converter</title>
-        <link rel="stylesheet" href=
-"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src=
-"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-    </script>
-    <script src=
-"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js">
-    </script>
-    <script src=
-"https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
-    </script>
+    <title>Multiple Image to PDF Converter</title>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href=
-"https://fonts.googleapis.com/css2?family=Amiri&family=Lobster&family=Pacifico&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="image_to_pdf.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="./image_to_pdf.css">
 </head>
 <body>
-    <!-- Main Content Section -->
-    <main>
-        <section id="image_to_pdf">
-            <h2>Image to PDF Converter</h2>
-            <input type="file" id="imageInput" accept="image/*" multiple />
-            <button onclick="convertToPDF()">Convert to PDF</button>
-            <a id="downloadLink" href="#">Download PDF</a>
-        </section>
-    </main>
+    <div class="container">
+        <h1>Image to PDF Converter</h1>
+        <p>Upload multiple images and convert them into a single PDF file.</p>
 
-    <script src="image_to_pdf.js"></script>
+        <!-- File Upload Section -->
+        <div class="upload-section">
+            <input type="file" id="file-input" accept="image/*" multiple>
+            <label for="file-input" class="upload-btn">
+                <i class="fas fa-upload"></i> Choose Images
+            </label>
+        </div>
+
+        <!-- Image Preview Section -->
+        <div id="image-preview" class="image-preview"></div>
+
+        <!-- Convert and Download Buttons -->
+        <div class="actions" style="display: none;">
+            <button id="convert-btn" disabled>Convert to PDF</button>
+            <button id="download-btn" disabled>Download PDF</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="./image_to_pdf.js"></script>
 </body>
 </html>
