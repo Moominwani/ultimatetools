@@ -26,7 +26,7 @@ body.light-mode {
 /* Header Section */
 header {
     background: #00bcd4;
-    padding: 20px 15px; /* Increase padding */
+    padding: 20px 15px; /* Increased padding */
     text-align: center;
     position: fixed;
     top: 0;
@@ -42,6 +42,7 @@ header .header-content {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    flex-wrap: wrap; /* Allow wrapping of content */
 }
 
 header h1 {
@@ -56,16 +57,31 @@ header h1 {
 @media (max-width: 768px) {
     header .header-content {
         flex-direction: column; /* Stack header content vertically */
-        align-items: flex-start; /* Align items to the left */
+        align-items: center; /* Align items in the center */
+        width: 100%; /* Ensure full width */
     }
 
     header h1 {
         margin-bottom: 10px; /* Add some space between header text and toggle */
     }
 
-    /* Move the toggle button below the header text on small screens */
+    /* Adjust the toggle button to take full width on small screens */
     .toggle-switch {
+        display: flex;
+        justify-content: center; /* Center the toggle */
+        align-items: center;
+        width: 100%; /* Make toggle switch take full width */
         margin-top: 10px;
+        padding-left: 10px; /* Ensure it's properly aligned */
+    }
+
+    .slider {
+        width: 70px; /* Increase width for better visibility */
+    }
+
+    /* Adjust the icon size */
+    #sun-icon, #moon-icon {
+        font-size: 12px; /* Adjust font size */
     }
 }
 
@@ -181,4 +197,4 @@ footer p {
     footer p {
         font-size: 14px;
     }
-            }
+}
