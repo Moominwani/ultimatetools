@@ -24,30 +24,28 @@ body.light-mode {
     color: black;
 }
 
-/* Header */
+/* Header Section */
 header {
     background: #00bcd4;
-    height: 90px; /* Fixed height for the header */
-    padding: 0 15px; /* Padding on left and right */
+    padding: 20px 15px; /* Increase the padding to make more space */
+    text-align: center;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    display: flex;
-    justify-content: space-between; /* Space between elements */
-    align-items: center; /* Vertical center */
+    transition: background-color 0.3s;
+    overflow: hidden;
 }
 
 /* Header Title */
 header h1 {
     margin: 0;
-    font-size: 24px;
+    font-size: 2px; /* Reduced font size for the header title */
     color: white;
-    flex-grow: 1;
-    text-align: center;
+    display: inline-block;
+    transition: color 0.3s;
 }
-
 /* Dark Mode Toggle Icon */
 #dark-mode-toggle {
     cursor: pointer;
