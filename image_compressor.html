@@ -1,220 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<!-- Coding By CodingNepal - youtube.com/codingnepal -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Image Resizer JavaScript | CodingNepal</title>
+    <link rel="stylesheet" href="image_compressor.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Compressor</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Lobster&family=Pacifico&display=swap" rel="stylesheet">
-    <style>
-        /* General Styles */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #000000; /* Dark background to highlight the content */
-            color: white;
-            text-align: center;
-            padding: 0;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Image Compressor Full Page Box */
-        #image_compressor {
-            background: rgba(255, 255, 255, 0.15); /* Semi-transparent */
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0px 0px 30px rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(15px);
-            width: 60%;
-            height: 70vh;
-            text-align: center;
-            border: 5px solid black; /* Full black border */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Heading */
-        #image_compressor h2 {
-            color: #FFFFFF;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        /* Label */
-        label {
-            display: block;
-            margin: 15px 0;
-            font-size: 1.2rem;
-            color:;
-        }
-
-        /* Input Fields */
-        input[type="file"],
-        input[type="number"] {
-            width: 80%;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 10px;
-            border: 2px solid rgba(255, 255, 255, 0.3); /* Light border */
-            font-size: 1rem;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-        }
-
-        /* Button */
-        button {
-            background: linear-gradient(to right, #C46A24, #6E44D1);
-            padding: 15px 30px;
-            font-size: 1.3rem;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 20px;
-        }
-
-        button:hover {
-            background: linear-gradient(to right, #1BB52F, #D515B1);
-        }
-
-        /* Download Button */
-        #downloadLink {
-            display: inline-block;
-            padding: 15px 30px;
-            background-color: #3498db;
-            color: white;
-            font-size: 1.3rem;
-            font-weight: bold;
-            text-decoration: none;
-            border: 3px solid #2980b9;
-            border-radius: 10px;
-            text-align: center;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-top: 20px;
-        }
-
-        #downloadLink:hover {
-            background-color: #2980b9;
-            border-color: #1c5d8d;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-            transform: translateY(-3px);
-        }
-
-        /* Show compressed size */
-        #compressedSize {
-            font-size: 1.2rem;
-            color: #d9534f;
-            margin-top: 20px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            #image_compressor {
-                width: 95%;
-                height: 95vh;
-                padding: 30px;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-
-            button, #downloadLink {
-                font-size: 1.2rem;
-                padding: 12px 25px;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <section id="image_compressor">
-        <h2>Image Compressor</h2>
-        <input type="file" id="imageInput" accept="image/*" />
-        <br/>
-        <label for="compressionKb">Target Compression Size (KB): <span id="compressionValue">50 KB</span></label>
-        <input type="number" id="compressionKb" min="50" value="50" />
-        <br/>
-        <button onclick="compressImage()">Compress Image</button>
-        <br/>
-        <canvas id="canvas" style="display: none;"></canvas>
-        <a id="downloadLink" href="#" style="display:none;">Download Compressed Image</a>
-        <p id="compressedSize"></p> <!-- This is where the compressed size will be shown -->
-    </section>
-
-    <script>
-        document.getElementById('compressionKb').addEventListener('input', function() {
-            document.getElementById('compressionValue').textContent = this.value + ' KB';
-        });
-
-        function compressImage() {
-            const fileInput = document.getElementById('imageInput');
-            if (fileInput.files.length === 0) {
-                alert('Please select an image to compress.');
-                return;
-            }
-
-            const targetSizeKb = document.getElementById('compressionKb').value;
-            const file = fileInput.files[0];
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = new Image();
-                img.onload = function() {
-                    const canvas = document.getElementById('canvas');
-                    const ctx = canvas.getContext('2d');
-                    const MAX_WIDTH = 800;
-                    const MAX_HEIGHT = 800;
-                    let width = img.width;
-                    let height = img.height;
-
-                    // Scale image
-                    if (width > height) {
-                        if (width > MAX_WIDTH) {
-                            height *= MAX_WIDTH / width;
-                            width = MAX_WIDTH;
-                        }
-                    } else {
-                        if (height > MAX_HEIGHT) {
-                            width *= MAX_HEIGHT / height;
-                            height = MAX_HEIGHT;
-                        }
-                    }
-
-                    canvas.width = width;
-                    canvas.height = height;
-                    ctx.drawImage(img, 0, 0, width, height);
-
-                    let quality = 1;
-                    let dataUrl = canvas.toDataURL('image/jpeg', quality);
-
-                    // Reduce quality until the file size is within the target size (in KB)
-                    const targetSize = targetSizeKb * 1024; // Convert KB to bytes
-                    while (dataUrl.length > targetSize && quality > 0.05) {
-                        quality -= 0.05;
-                        dataUrl = canvas.toDataURL('image/jpeg', quality);
-                    }
-
-                    const downloadLink = document.getElementById('downloadLink');
-                    downloadLink.href = dataUrl;
-                    downloadLink.download = 'compressed_image.jpg';
-                    downloadLink.style.display = 'block'; // Show the download link
-
-                    // Show the compressed image size
-                    const compressedSize = Math.round((dataUrl.length / 1024)); // in KB
-                    document.getElementById('compressedSize').textContent = 'Compressed Size: ' + compressedSize + ' KB';
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-    </script>
-
-</body>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="upload-box">
+        <input type="file" accept="image/*" hidden>
+        <img src="https://www.codingnepalweb.com/demos/resize-and-compress-image-javascript/upload-icon.svg" alt="">
+        <p>Browse File to Upload</p>
+      </div>
+      <div class="content">
+        <div class="row sizes">
+          <div class="column width">
+            <label>Width</label>
+            <input type="number">
+          </div>
+          <div class="column height">
+            <label>Height</label>
+            <input type="number">
+          </div>
+        </div>
+        <div class="row checkboxes">
+          <div class="column ratio">
+            <input type="checkbox" id="ratio" checked>
+            <label for="ratio">Lock aspect ratio</label>
+          </div>
+          <div class="column quality">
+            <input type="checkbox" id="quality">
+            <label for="quality">Reduce quality</label>
+          </div>
+        </div>
+        <button class="download-btn">Download Image</button>
+      </div>
+    </div>
+    <script src="image_compressor.js"></script>
+  </body>
 </html>
