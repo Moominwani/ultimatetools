@@ -33,19 +33,43 @@ header {
     left: 0;
     width: 100%;
     z-index: 1000;
-    transition: background-color 0.3s;
-    overflow: hidden;
+    display: flex;
+    justify-content: space-between; /* Space between elements */
+    align-items: center; /* Align vertically */
 }
 
-/* Header Text */
+/* Header Title */
 header h1 {
     margin: 0;
     font-size: 24px;
     color: white;
-    display: inline-block;
-    transition: color 0.3s;
+    flex-grow: 1;
+    text-align: center;
 }
 
+/* Dark Mode Toggle Icon - Wapas Lao */
+#dark-mode-toggle {
+    cursor: pointer;
+    font-size: 24px; /* Bigger for visibility */
+    color: white;
+    margin-right: 20px; /* Thoda spacing */
+    display: inline-block; /* Ensure it remains visible */
+}
+
+/* Responsive Fixes */
+@media (max-width: 768px) {
+    #dark-mode-toggle {
+        font-size: 20px;
+        margin-right: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    #dark-mode-toggle {
+        font-size: 18px;
+        margin-right: 10px;
+    }
+}
 /* Dark Mode Header */
 body.dark-mode header h1 {
     color: white;
@@ -57,14 +81,14 @@ nav {
     background: #00bcd4;
     overflow: hidden;
     position: fixed;
-    top: 60px; /* Adjust if needed */
+    top: 60px;
     left: 0;
     z-index: 999;
 }
 
 /* Ensure Content is Below Navbar */
 #home {
-    padding-top: 140px; /* Increased padding to push content below navbar */
+    padding-top: 140px;
     padding-left: 10px;
     padding-right: 10px;
     margin: 0 auto;
@@ -114,12 +138,17 @@ footer p {
         font-size: 20px;
     }
 
+    #dark-mode-toggle {
+        font-size: 18px; /* Adjust size for smaller screens */
+        margin-right: 10px;
+    }
+
     nav {
         top: 50px; /* Adjust navbar position for small screens */
     }
 
     #home {
-        padding-top: 160px; /* Increase space for smaller screens */
+        padding-top: 160px;
     }
 
     #home h1 {
@@ -144,12 +173,17 @@ footer p {
         font-size: 18px;
     }
 
+    #dark-mode-toggle {
+        font-size: 16px;
+        margin-right: 8px;
+    }
+
     nav {
-        top: 48px; /* Adjust navbar position */
+        top: 48px;
     }
 
     #home {
-        padding-top: 170px; /* More space for very small screens */
+        padding-top: 170px;
     }
 
     #home h1 {
